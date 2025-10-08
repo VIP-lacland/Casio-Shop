@@ -120,5 +120,58 @@
       "price": "1.455.000 ₫",
       "id": "Fm20"
     }
+  ],
+  
+  "Account": [
+    {
+      "username": "admin",
+      "password": "admin123",
+      "email": "admin@example.com"
+    },
+    {
+      "username": "user1",
+      "password": "user123",
+      "email": "user1@example.com"
+    },
+    {
+      "username": "user2",
+      "password": "user234",
+      "email": "user2@example.com"
+    },
+    {
+      "username": "user3",
+      "password": "user345",
+      "email": "user3@example.com"
+    },
+    {
+      "username": "user4",
+      "password": "user456",
+      "email": "user4@example.com"
+    },
+    {
+      "username": "user5",
+      "password": "user567",
+      "email": "user5@example.com"
+    },
+    {
+      "username": "user6",
+      "password": "user678",
+      "email": "user6@example.com"
+    },
+    {
+      "username": "user7",
+      "password": "user789",
+      "email": "user7@example.com"
+    },
+    {
+      "username": "user8",
+      "password": "user890",
+      "email": "user8@example.com"
+    },
+    {
+      "username": "user9",
+      "password": "user901",
+      "email": "user9@example.com"
+    }
   ]
 }
