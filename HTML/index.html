@@ -1,97 +1,28 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Casio Store</title>
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casio Store</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
 <body>
+    <!-- Header sẽ được load bằng JavaScript -->
+    <div id="header"></div>
+    
+    <!-- Nội dung chính thay đổi -->
+    <main id="main-content">
+        <!-- Nội dung sẽ được load động ở đây -->
+    </main>
+    
+    <!-- Footer sẽ được load bằng JavaScript -->
+    <div id="footer"></div>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">
-      <img src="/Image/logo.png" alt="logo shop">
-      <h1>CASIO <span>STORE</span></h1>
-    </div>
+    <script src="/javascript/app.js"></script>
+    <script src="/javascript/card.js"></script>
+    <script src="/javascript/product.js "></script>
+    
 
-    <nav>
-      <ul>
-        <li><a href="#" class="active">Trang chủ</a></li>
-        <li><a href="shop.html">Cửa hàng</a></li>
-        <li><a href="#">Giới thiệu</a></li>
-      </ul>
-    </nav>
-
-    <div class="actions">
-      <div class="search-box">
-        <i class="fa fa-search"></i>
-        <input type="text" placeholder="Tìm kiếm sản phẩm...">
-      </div>
-      <button><i class="fa-regular fa-user"></i></button>
-      <button><i class="fa-solid fa-cart-shopping"></i></button>
-    </div>
-  </header>
-
-  <main>
-    <div id="content"></div>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-container">
-      <div class="footer-column">
-        <div class="footer-logo">
-        <img src="/Image/logo.png" alt="logo shop">
-          <span class="brand">CASIO STORE</span>
-        </div>
-        <p>
-          Cửa hàng đồng hồ Casio chính hãng, uy tín hàng đầu Việt Nam.
-          Chất lượng đảm bảo, giá cả cạnh tranh.
-        </p>
-        <div class="social-icons">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-        </div>
-      </div>
-
-      <div class="footer-column">
-        <h3>Liên kết</h3>
-        <ul>
-          <li><a href="#">Giới thiệu</a></li>
-          <li><a href="#">Sản phẩm</a></li>
-          <li><a href="#">Chính sách bảo hành</a></li>
-          <li><a href="#">Chính sách đổi trả</a></li>
-          <li><a href="#">Hướng dẫn mua hàng</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h3>Danh mục</h3>
-        <ul>
-          <li><a href="#">G-Shock</a></li>
-          <li><a href="#">Edifice</a></li>
-          <li><a href="#">Baby-G</a></li>
-          <li><a href="#">Pro Trek</a></li>
-          <li><a href="#">Vintage</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h3>Liên hệ</h3>
-        <ul class="contact">
-          <li><i class="fa-solid fa-location-dot"></i> 123 Đường ABC, Quận 1, TP. Hồ Chí Minh</li>
-          <li><i class="fa-solid fa-phone"></i> 1900 1234</li>
-          <li><i class="fa-solid fa-envelope"></i> info@casiostore.vn</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      © 2025 Casio Store. Bảo lưu mọi quyền.
-    </div>
-  </footer>
 </body>
 </html>
