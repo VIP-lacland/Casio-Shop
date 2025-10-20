@@ -59,7 +59,14 @@ async function loadPage(pageName) {
         `;
     }
 }
-
+ // load button acction 
+ function loadbuttonaccount(){
+    const accountButton = document.getElementById('account-button');
+    if (accountButton) {
+        accountButton.addEventListener('click', function() {
+            loadPage('account');
+        });
+    }   }
 
 
 // Khởi chạy khi trang load
@@ -69,7 +76,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load header và footer
     loadHTML('header', '/HTML/partials/header.html');
     loadHTML('footer', '/HTML/partials/footer.html');
-    
+    loadHTML('main-content', '/HTML/partials/home.html');
+    loadbuttonaccount();
     // Hiển thị nội dung mặc định ngay lập tức
     document.getElementById('main-content').innerHTML = createDefaultHome();
 });
+
+// Hàm để khi mở trang sẽ hiện trang chủ
+function homepage() {
+    loadPage('home');
+}
+// Hàm qua trang shop mà không cần load lại trang thay đổi header
+function shoppage() {
+    loadPage('shop');
+}
+// Hàm qua trang contact
+function contactpage() {
+    loadPage('contact');
+}
