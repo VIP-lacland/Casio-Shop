@@ -60,8 +60,6 @@ async function loadPage(pageName) {
     }
 }
 
-
-
 // Khởi chạy khi trang load
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded - starting app...'); // Debug
@@ -73,3 +71,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hiển thị nội dung mặc định ngay lập tức
     document.getElementById('main-content').innerHTML = createDefaultHome();
 });
+
