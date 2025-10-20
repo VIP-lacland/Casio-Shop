@@ -47,6 +47,10 @@ async function loadPage(pageName) {
         document.getElementById('main-content').innerHTML = content;
         console.log('Page loaded successfully:', pageName); // Debug
         
+        // 👉 Gắn sự kiện form sau khi contact.html đã load xong
+        if (pageName === 'contact') {
+            initContactForm();
+        }
     } catch (error) {
         console.error('Error loading page:', error);
         document.getElementById('main-content').innerHTML = `
@@ -68,29 +72,14 @@ async function loadPage(pageName) {
         });
     }   }
 
-
-// Khởi chạy khi trang load
+// Load header và footer
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded - starting app...'); // Debug
     
     // Load header và footer
     loadHTML('header', '/HTML/partials/header.html');
     loadHTML('footer', '/HTML/partials/footer.html');
-    loadHTML('main-content', '/HTML/partials/home.html');
-    loadbuttonaccount();
+    
     // Hiển thị nội dung mặc định ngay lập tức
     document.getElementById('main-content').innerHTML = createDefaultHome();
 });
-
-// Hàm để khi mở trang sẽ hiện trang chủ
-function homepage() {
-    loadPage('home');
-}
-// Hàm qua trang shop mà không cần load lại trang thay đổi header
-function shoppage() {
-    loadPage('shop');
-}
-// Hàm qua trang contact
-function contactpage() {
-    loadPage('contact');
-}
