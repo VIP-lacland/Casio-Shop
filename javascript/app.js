@@ -47,6 +47,10 @@ async function loadPage(pageName) {
         document.getElementById('main-content').innerHTML = content;
         console.log('Page loaded successfully:', pageName); // Debug
         
+        // 👉 Gắn sự kiện form sau khi contact.html đã load xong
+        if (pageName === 'contact') {
+            initContactForm();
+        }
     } catch (error) {
         console.error('Error loading page:', error);
         document.getElementById('main-content').innerHTML = `
@@ -61,15 +65,50 @@ async function loadPage(pageName) {
 }
 
 
-
-// Khởi chạy khi trang load
+// Load header và footer
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded - starting app...'); // Debug
     
-    // Load header và footer
-    loadHTML('header', '/HTML/partials/header.html');
-    loadHTML('footer', '/HTML/partials/footer.html');
+    // ❗ Dùng đường dẫn tương đối, KHÔNG có dấu "/"
+    // loadHTML('header', './HTML/partials/header.html');
+    // loadHTML('footer', './HTML/partials/footer.html');
+    loadHTML('header', './partials/header.html');
+    loadHTML('footer', './partials/footer.html');
     
-    // Hiển thị nội dung mặc định ngay lập tức
+    // Hiển thị nội dung mặc định
     document.getElementById('main-content').innerHTML = createDefaultHome();
 });
+
+
+// lưu dữ liệu form vào local
+ document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault(); 
+
+    // Lấy dữ liệu người dùng nhập
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    // Tạo đối tượng chứa dữ liệu
+    const contactData = {
+      name: name,
+      email: email,
+      message: message,
+      time: new Date().toLocaleString()
+    };
+
+    // Lấy danh sách đã lưu (nếu có)
+    let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+
+    // Thêm dữ liệu mới
+    contacts.push(contactData);
+
+    // Lưu lại vào localStorage
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+
+    // Thông báo thành công
+    alert("Đã lưu thông tin liên hệ của bạn!");
+
+    // Xóa nội dung form
+    document.getElementById("contactForm").reset();
+  });
