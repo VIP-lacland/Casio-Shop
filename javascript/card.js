@@ -1,34 +1,60 @@
-// Lấy các phần tử cần thao tác
-const minusBtn = document.querySelector('.minus');
-const plusBtn = document.querySelector('.plus');
-const quantityEl = document.querySelector('.quantity');
-const totalEl = document.getElementById('total');
-const priceEl = document.querySelector('.cart-price h4');
+// Lấy các phần tử
+const nutTru = document.querySelector('.nut-tru');
+const nutCong = document.querySelector('.nut-cong');
+const hienThiSoLuong = document.querySelector('.so-luong-hien-tai');
+const tongPhuEl = document.getElementById('tong-phu-san-pham');
+const giaEl = document.querySelector('.gia');
+const tamTinhEl = document.getElementById('tam-tinh');
+const tongCongEl = document.getElementById('tong-cong');
 
-// Lấy giá gốc từ phần tử giá (bỏ dấu $)
-const price = parseFloat(priceEl.textContent.replace('$', ''));
-
-// Biến lưu số lượng
-let quantity = 1;
+// Lấy giá (loại bỏ ký tự ₫ và dấu .) | Biến lưu số lượng
+const gia = parseFloat(giaEl.textContent.replace(/[^\d]/g, ''));
+let soLuong = 1;
 
 // Hàm cập nhật tổng
-function updateTotal() {
-  const total = price * quantity;
-  totalEl.textContent = `$${total.toLocaleString()}`; // định dạng số đẹp hơn
+function capNhatTong() {
+  const tongPhu = gia * soLuong;
+  const dinhDang = tongPhu.toLocaleString('vi-VN') + ' ₫';
+  tongPhuEl.textContent = dinhDang;
+  tamTinhEl.textContent = dinhDang;
+  tongCongEl.textContent = dinhDang;
 }
+  
 
-// Khi bấm nút +
-plusBtn.addEventListener('click', () => {
-  quantity++;
-  quantityEl.textContent = quantity;
-  updateTotal();
+// Nút cộng 
+nutCong.addEventListener('click', () => {
+  soLuong++;
+  hienThiSoLuong.textContent = soLuong;
+  capNhatTong();
+});
+// Nút trừ
+nutTru.addEventListener('click', () => {
+  if (soLuong > 1) {
+    soLuong--;
+    hienThiSoLuong.textContent = soLuong;
+    capNhatTong();
+  }
 });
 
-// Khi bấm nút −
-minusBtn.addEventListener('click', () => {
-  if (quantity > 0) {
-    quantity--;
-    quantityEl.textContent = quantity;
-    updateTotal();
+
+// Nút Xóa một sản phẩm
+const nutXoa = document.querySelector('.nut-xoa');
+nutXoa.addEventListener('click', () => {
+  const theCard = nutXoa.closest('.the-card');
+  if (theCard) {
+    const xacNhan = confirm("🗑️ Bạn có chắc chắn muốn xóa sản phẩm này không?");
+    if (xacNhan) {
+      theCard.remove();
+
+      // Nếu có lưu trong localStorage thì xóa luôn:
+      const productId = theCard.dataset.id; 
+      if (productId) {
+        const cart = JSON.parse(localStorage.getItem('cart_demo')) || {};
+        delete cart[productId];
+        localStorage.setItem('cart_demo', JSON.stringify(cart));
+      }
+
+      alert("Đã xóa sản phẩm!");
+    }
   }
 });

@@ -7,40 +7,52 @@
   <link rel="stylesheet" href="/styles/cart.css">
 </head>
 <body>
-  <div class="container">
-    <p>Tiếp tục mua sắm</p>
-    <h1>Giỏ hàng của bạn</h1>
-    <div class="cart-container">
-      <div class="cart-part">
-        <div class="cart-img">
-          <img src="https://cdn.tgdd.vn/Products/Images/42/190321/iphone-xs-max-gold-600x600.jpg" alt="">
+<div class="thanh-dieu-huong">
+  <a href="#" class="back-link">
+    <p>← Tiếp tục mua sắm</p> 
+  </a>
+  <h1>Giỏ hàng của bạn</h1>
+</div>
+<div class="cart-container">
+  <div class="danh-sach-san-pham">
+    <div class="san-pham">
+      <img src="https://product.hstatic.net/1000370129/product/iphone-xs-max-den_dceeba6383c24e34844206f8ffa5845b_master.jpg" alt="Product">
+      <div class="thong-tin-san-pham">
+        <h3>Iphone Xs-max 64gb</h3>
+        <p class="gia">3.290.000 ₫</p>
+        <div class="so-luong">
+          <button class="nut-tru">-</button>
+          <span class="so-luong-hien-tai">1</span>
+          <button class="nut-cong">+</button>
         </div>
-        <div class="cart-decs"> 
-          <h3>Iphone XSmax</h3>
-        </div>
-        <div class="cart-quantity">
-          <button class="qty-btn minus">−</button>
-          <span class="quantity">1</span>
-          <button class="qty-btn plus">+</button>
-        </div>
-        <div class="cart-price">
-          <h4>$2000</h4>
-        </div>
-        <div class="cart-remote">
-          <button class="remove-btn">Remove</button>
+
+      </div>
+      <div class="hanh-dong-san-pham">
+        <div class="tong-phu">
+          <b>Tổng Phụ</b>
+          <p><span id="tong-phu-san-pham">3.290.000 ₫</span></p>
+          <button class="delete-btn">🗑️ Xóa</button>
         </div>
       </div>
-        <div class="cart-sumary">
-          <div class="product-total">
-            <h2>Total Product: <span id="total">$2000</span></h2>
-          </div>
-          <div class="product-ckeckout">
-            <a href="#" class="checkout">Checkout</a>
-          </div>
-          <button class="remove-All">ClearALL</button>
-        </div>
     </div>
   </div>
-  <script src="/javascript/card.js"></script>
+
+  <div class="tong-ket-don-hang">
+    <h2>Tổng đơn hàng</h2>
+    <p>Tạm tính: <span id="tam-tinh">3.290.000 ₫</span></p>
+    <p>Phí vận chuyển: <span>Miễn phí</span></p>
+    <hr class="line">
+    <p class="total">Tổng cộng: <span id="tong-cong">3.290.000 ₫</span></p>
+    <button class="nut-thanh-toan">Thanh toán</button>
+    <button class="nut-tiep-tuc">Tiếp tục mua sắm</button>
+    <hr class="line">
+    <ul class="distance">
+      <li>100% hàng chính hãng</li>
+      <li>Bảo hành toàn cầu</li>
+      <li>Đổi trả trong 7 ngày</li>
+    </ul>
+  </div>
+</div>
+<script src="/javascript/card.js"></script>
 </body>
 </html>
