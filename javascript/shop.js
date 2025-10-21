@@ -1,104 +1,121 @@
-// truy cập đến nút bấm
-const items = document.querySelectorAll('.filed_type .type button');
-items.forEach(item => {item.addEventListener('click',() => handleButtonClick(item, items));});
 
+function initializeShopPage() {
+  console.log("🛍️ Shop Page Initialized");
 
-// Xử lý nút bấm
-function handleButtonClick(selectedButton, allButtons) {
-    allButtons.forEach(i => i.classList.remove('active'));
-    selectedButton.classList.add('active');
-}
+  let products = []; // Dữ liệu sản phẩm toàn cục trong file
 
+  // ======= FETCH DỮ LIỆU =======
+  fetch('/db.json')
+    .then(response => response.json())
+    .then(data => {
+      products = data.Product;
+      initializeDefaultButton();
+      attachButtonEvents();
+      showProductByBrand('Tất cả');
+    })
+  // ======= GẮN SỰ KIỆN NÚT DANH MỤC =======
+  function attachButtonEvents() {
+    const items = document.querySelectorAll('.filed_type .type button');
+    if (!items || items.length === 0) {
+      console.warn("⚠️ Không tìm thấy nút danh mục trong shop.html");
+      return;
+    }
 
-let products = null;
-// lấy dữ liệu từ file json
-fetch('/db.json')
-  .then(response => response.json())
-  .then(data => {
-    products = data.Product;
-    showProductByBrand('Tất cả');
-  })
-
-  //  Tạo thẻ sản phẩm
-function createProductCard(product) {
-  let newProduct = document.createElement('div');
-  newProduct.classList.add('product_card');
-  newProduct.innerHTML = 
-  `<div class="image_card">
-        <img src="${product.img}" alt="">
-        </div>
-        <div class="product_infor">
-            <p>${product.brand}</p>
-            <h3>${product.name}</h3>
-            <div class="icon_card">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-            </div>
-            <div class="price_card">
-                <span class="official_price">${product.price}</span>
-                <span class="reduced_price">2000.000</span>
-            </div>
-            <button><i class="fa-solid fa-cart-shopping"></i>Thêm vào giỏ hàng</button>
-        </div>`;
-        return newProduct;
-}
-
-
-// hiển thị những dữ liệu từ trong danh sách html
-function showProductByBrand(brand) {
-  // xoá dữ liệu mặc định trong html
-  let listProductHTML = document.querySelector('.products')
-  listProductHTML.innerHTML = '';
-  // Tổng số sản phẩm sau lọc
-  let total = document.querySelector('.sum_product')
-
-  let type = "Tất cả";
-  if (type === brand) { 
-    if (products != null) {
-      products.forEach(product => {
-      let productCard = createProductCard(product)
-      listProductHTML.appendChild(productCard);
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        handleButtonClick(item, items);
+        const brand = item.textContent.trim();
+        showProductByBrand(brand);
+      });
     });
   }
-  }else {
-      let listProductBrand = products.filter( product => product.brand.toLowerCase() === brand.toLowerCase());
-      if (!listProductBrand || listProductBrand.length === 0) {
-      listProductHTML.innerHTML = `<p>Sản phẩm hiệu ${type} đã hết hàng</p>`;
-      return;
-    } else { 
-      listProductBrand.forEach( product => { 
-      let productCard = createProductCard(product)
-      listProductHTML.appendChild(productCard);
-    })
-    };
+
+  // ======= XỬ LÝ ACTIVE NÚT BẤM =======
+  function handleButtonClick(selectedButton, allButtons) {
+    allButtons.forEach(i => i.classList.remove('active'));
+    selectedButton.classList.add('active');
   }
-  updateTotalProducts(listProductHTML, total);
+
+  // ======= HIỂN THỊ SẢN PHẨM THEO THƯƠNG HIỆU =======
+  function showProductByBrand(brand) {
+    const listProductHTML = document.querySelector('.products');
+    const total = document.querySelector('.sum_product');
+    if (!listProductHTML) return;
+
+    listProductHTML.innerHTML = '';
+
+    // Nếu là "Tất cả" → hiển thị toàn bộ
+    let filtered = [];
+    if (brand === 'Tất cả') {
+      filtered = products;
+    } else {
+      filtered = products.filter(
+        product => product.brand.toLowerCase() === brand.toLowerCase()
+      );
+    }
+
+    // Nếu không có sản phẩm
+    if (!filtered || filtered.length === 0) {
+      listProductHTML.innerHTML = `<p>Sản phẩm hiệu ${brand} đã hết hàng</p>`;
+    } else {
+      filtered.forEach(product => {
+        const productCard = createProductCard(product);
+        listProductHTML.appendChild(productCard);
+      });
+    }
+
+    updateTotalProducts(listProductHTML, total);
+  }
+
+  // ======= TẠO THẺ SẢN PHẨM =======
+  function createProductCard(product) {
+    const newProduct = document.createElement('div');
+    newProduct.classList.add('product_card');
+    newProduct.innerHTML = `
+      <div class="image_card">
+        <img src="${product.img}" alt="">
+      </div>
+      <div class="product_infor">
+        <p>${product.brand}</p>
+        <h3>${product.name}</h3>
+        <div class="icon_card">
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+        </div>
+        <div class="price_card">
+          <span class="official_price">${product.price}</span>
+          <span class="reduced_price">2.000.000</span>
+        </div>
+        <button><i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ hàng</button>
+      </div>`;
+    return newProduct;
+  }
+
+  // ======= CẬP NHẬT SỐ SẢN PHẨM HIỂN THỊ =======
+  function updateTotalProducts(listElement, totalElement) {
+    if (!totalElement) return;
+    const totalProducts = listElement.childElementCount;
+    totalElement.innerHTML = `<p>Hiển thị ${totalProducts} sản phẩm</p>`;
+  }
+
+  // ======= NÚT MẶC ĐỊNH KHI VỪA LOAD =======
+  function initializeDefaultButton() {
+    const defaultBtn = document.querySelector('.filed_type .type .default');
+    if (defaultBtn) {
+      defaultBtn.classList.add('active');
+    }
+  }
 }
 
-
-// Đếm số sản phẩm có trong listElement
-function updateTotalProducts(listElement, totalElement) {
-  // Đếm số phần tử con trong list
-  let totalProducts = listElement.childElementCount;
-  // Cập nhật nội dung
-  totalElement.innerHTML = `<p>Hiển thị ${totalProducts} sản phẩm</p>`;
-}
-
-
-// Luôn hiển thị màu cho nút khi mới load trang và show sản phẩm ban đầu
-function initializeDefaultButton() {
-  const item = document.querySelector('.filed_type .type .default');
-  if (!item) return;
-  item.classList.remove('active');
-  item.classList.add('active');
-}
-
+// ===============================
+// 🔹 TỰ ĐỘNG KHỞI TẠO NẾU MỞ SHOP.HTML RIÊNG
+// ===============================
 document.addEventListener('DOMContentLoaded', () => {
-  initializeDefaultButton();
+  const shopContainer = document.querySelector('#shop');
+  if (shopContainer && typeof initializeShopPage === 'function') {
+    initializeShopPage();
+  }
 });
-
-
-

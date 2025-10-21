@@ -47,6 +47,20 @@ async function loadPage(pageName) {
         document.getElementById('main-content').innerHTML = content;
         console.log('Page loaded successfully:', pageName); // Debug
         
+        // 👉 Gắn sự kiện form sau khi contact.html đã load xong
+        if (pageName === 'contact') {
+            initContactForm();
+        }
+        // 👉 Gắn sự kiện cho nút tài khoản sau khi shop đã load xong
+        if (pageName === 'shop') {
+    console.log("🛒 Shop page loaded. Running initializeShopPage...");
+    if (typeof initializeShopPage === 'function') {
+        initializeShopPage();
+    } else {
+        console.warn("⚠️ initializeShopPage() chưa sẵn sàng, kiểm tra shop.js import trong index.html");
+    }
+}
+        
     } catch (error) {
         console.error('Error loading page:', error);
         document.getElementById('main-content').innerHTML = `
@@ -59,7 +73,16 @@ async function loadPage(pageName) {
         `;
     }
 }
+ // load button acction 
+ function loadbuttonaccount(){
+    const accountButton = document.getElementById('account-button');
+    if (accountButton) {
+        accountButton.addEventListener('click', function() {
+            loadPage('account');
+        });
+    }   }
 
+// Load header và footer
 // Khởi chạy khi trang load
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded - starting app...'); // Debug
