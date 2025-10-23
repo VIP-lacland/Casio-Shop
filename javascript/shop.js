@@ -1,4 +1,3 @@
-
 function initializeShopPage() {
   console.log("🛍️ Shop Page Initialized");
 
@@ -131,5 +130,3 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeShopPage();
   }
 });
-
-
