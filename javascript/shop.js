@@ -1,6 +1,6 @@
 
 function initializeShopPage() {
-  console.log("🛍️ Shop Page Initialized");
+  console.log(" Shop Page Initialized");
 
   let products = []; // Dữ liệu sản phẩm toàn cục trong file
 
@@ -17,7 +17,7 @@ function initializeShopPage() {
   function attachButtonEvents() {
     const items = document.querySelectorAll('.filed_type .type button');
     if (!items || items.length === 0) {
-      console.warn("⚠️ Không tìm thấy nút danh mục trong shop.html");
+      console.warn("Không tìm thấy nút danh mục trong shop.html");
       return;
     }
 
@@ -69,9 +69,11 @@ function initializeShopPage() {
 
   // ======= TẠO THẺ SẢN PHẨM =======
   function createProductCard(product) {
-    const newProduct = document.createElement('div');
-    newProduct.classList.add('product_card');
-    newProduct.innerHTML = `
+  const newProduct = document.createElement('div');
+  newProduct.classList.add('product_card');
+
+  newProduct.innerHTML = `
+    <a href="/HTML/partials/product_detail.html?id=${product.id}">
       <div class="image_card">
         <img src="${product.img}" alt="">
       </div>
@@ -89,10 +91,20 @@ function initializeShopPage() {
           <span class="official_price">${product.price}</span>
           <span class="reduced_price">2.000.000</span>
         </div>
-        <button><i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ hàng</button>
-      </div>`;
-    return newProduct;
-  }
+      </div>
+    </a>
+    <button><i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ hàng</button>
+  `;
+
+  // ✅ Giữ nguyên bố cục, thêm event "Thêm vào giỏ"
+  const addToCartBtn = newProduct.querySelector('button');
+  addToCartBtn.addEventListener('click', (e) => {
+    e.preventDefault(); // tránh click ăn vào link
+    console.log(`🛒 Đã thêm "${product.name}" vào giỏ!`);
+  });
+
+  return newProduct;
+}
 
   // ======= CẬP NHẬT SỐ SẢN PHẨM HIỂN THỊ =======
   function updateTotalProducts(listElement, totalElement) {
@@ -131,5 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeShopPage();
   }
 });
+
 
 
