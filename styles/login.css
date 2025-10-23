@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Nền tối toàn trang */
+body {
+  background: linear-gradient(135deg, #0b0c0d, #17181c);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Giữ header + footer, canh form giữa */
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* canh giữa ngang */
+  align-items: center;     /* canh giữa dọc */
+  padding: 120px 20px 100px; /* tránh header & footer đè */
+  box-sizing: border-box;
+}
+/* Form Container */
+.container {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tiêu đề trong form */
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.title h1 {
+  background: linear-gradient(to right, #00ff99, #00ccff);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 28px;
+  font-weight: bold;
+}
+.title p {
+  color: #bbb;
+  font-size: 14px;
+}
+
+/* Form inputs */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #00ff99;
+}
+
+/* Nút đăng nhập / đăng ký */
+button.submit {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(to right, #00ff99, #00ccff);
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+button.submit:hover {
+  opacity: 0.9;
+}
+
+/* Link chuyển đổi đăng ký / đăng nhập */
+.toggle {
+  text-align: center;
+  margin-top: 10px;
+}
+.toggle button {
+  background: none;
+  border: none;
+  color: #00ff99;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Link quay về */
+.back-home {
+  text-align: center;
+  margin-top: 20px;
+}
+.back-home a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 14px;
+}
+.back-home a:hover {
+  color: white;
+}
+
+/* Ẩn/hiện các field */
+.hidden {
+  display: none;
+}
