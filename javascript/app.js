@@ -35,5 +35,8 @@ window.addEventListener('DOMContentLoaded', () => {
   loadHTML('header', '/HTML/header.html');
   loadHTML('footer', '/HTML/footer.html');
 });
+<<<<<<< HEAD
 // hàm lọc sản phẩm 
+=======
+>>>>>>> origin/cart_nhut
 

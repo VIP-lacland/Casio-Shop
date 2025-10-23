@@ -102,6 +102,13 @@ body {
 .nut-tiep-tuc:hover {
   background: #00D9FF;
   color: #000;
+<<<<<<< HEAD
+=======
+}
+.distance {
+  margin-left: -20px;
+  line-height: 2;
+>>>>>>> origin/cart_nhut
 }
 .distance {
   margin-left: -20px;

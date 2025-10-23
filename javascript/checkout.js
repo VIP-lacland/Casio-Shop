@@ -52,4 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("cart"); // Xóa giỏ hàng sau khi đặt hàng
     window.location.href = "shop.html"; // Quay lại cửa hàng
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> origin/cart_nhut

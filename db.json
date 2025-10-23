@@ -79,11 +79,18 @@
       "img": "https://www.watchstore.vn/wp-content/uploads/2023/11/bg5501-a4-1-1977979114-1746612935-1712668784-768x768.jpg",
       "stock": "35",
       "price": "5.550.500₫"
+<<<<<<< HEAD
     },
     {
       "id": "11",
       "name": "Bulova 32mm Nữ 96L273967867",
       "brand": "Omega",
+=======
+      },
+    {
+      "id": "11",
+      "name": "Bulova 32mm Nữ 96L273967867","brand": "Omega",
+>>>>>>> origin/cart_nhut
       "img": "https://www.watchstore.vn/wp-content/uploads/2022/03/96l273-1712581838-400x400.jpg",
       "stock": "20",
       "price": "10.612.250 ₫"
@@ -176,6 +183,7 @@
       "name": "Nguyễn Tiến Nhựt",
       "phone": "0983467523",
       "email": "nhutnguyen78@gmail.com",
+<<<<<<< HEAD
       "password": "nhutnhut78",
       "role": "admin",
       "createdAt": "2025-01-01T00:00:00Z"
@@ -188,6 +196,15 @@
       "password": "manhminhman123",
       "role": "admin",
       "createdAt": "2025-01-01T00:00:00Z"
+=======
+      "password": "nhutnhut78"
+    },
+    {"id": "3",
+      "name": "Nguyễn Mạnh",
+      "phone": "0965734872",
+      "email": "manhhaha@gmail.com",
+      "password": "manhminhman123"
+>>>>>>> origin/cart_nhut
     },
     {
       "id": "4",
@@ -208,4 +225,8 @@
       "createdAt": "2025-10-23T17:45:06.611Z"
     }
   ]
+<<<<<<< HEAD
 }
+=======
+  }
+>>>>>>> origin/cart_nhut
