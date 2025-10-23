@@ -108,7 +108,19 @@ function initializeShopPage() {
       defaultBtn.classList.add('active');
     }
   }
-}
+
+  let detailProduct = document.getElementById('product_card');
+
+  detailProduct.addEventListener('click', () => {
+    window.location.href = "/HTML/partials/product_detail.html";
+  })
+
+} // cuối initializeShopPage()
+
+
+  function goToDetail() {
+    window.location.href = "/HTML/partials/product_detail.html";
+  }
 
 // ===============================
 // 🔹 TỰ ĐỘNG KHỞI TẠO NẾU MỞ SHOP.HTML RIÊNG
@@ -119,3 +131,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeShopPage();
   }
 });
+
+

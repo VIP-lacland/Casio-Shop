@@ -1,0 +1,67 @@
+.btn {
+    margin-left: 5px;
+}
+
+/* .modal {
+    position: relative;
+    top: -100px;
+} */
+
+.modal-body div {
+    margin-bottom: 10px;
+}
+
+.modal-body .name-product {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.modal-body .name-product .first{
+    width: 50%;
+}
+
+.modal-body .name-product .first .inp {
+    width: 70%;
+    height: 35px;
+}
+
+.modal-body .image-link label {
+    margin-right: 25px;
+}
+
+.modal-body .image-link .url{
+    height: 35px;
+    width: 83%;
+}
+
+.modal-body .price-stock {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 15px;
+}
+
+.modal-body .price-stock .third {
+    display: inline;
+    margin-right: 10px;
+}
+
+.modal-body .price-stock .third input {
+    height: 35px;
+}
+
+.modal-body .price-stock .stock-product label{
+    margin-right: 65px;
+}
+
+.modal-body .price-stock .stock-product input {
+    width: 70%;
+    height: 35px;
+}
+
+.modal-body .price-stock .price-product label {
+    margin-right: 20px;
+}
+.modal-body .price-stock .price-product input {
+    width: 71%;
+}
