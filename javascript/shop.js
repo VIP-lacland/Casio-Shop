@@ -11,7 +11,8 @@ function initializeShopPage() {
       initializeDefaultButton();
       attachButtonEvents();
       showProductByBrand('Tất cả');
-    })
+    });
+
   // ======= GẮN SỰ KIỆN NÚT DANH MỤC =======
   function attachButtonEvents() {
     const items = document.querySelectorAll('.filed_type .type button');
@@ -43,17 +44,10 @@ function initializeShopPage() {
 
     listProductHTML.innerHTML = '';
 
-    // Nếu là "Tất cả" → hiển thị toàn bộ
-    let filtered = [];
-    if (brand === 'Tất cả') {
-      filtered = products;
-    } else {
-      filtered = products.filter(
-        product => product.brand.toLowerCase() === brand.toLowerCase()
-      );
-    }
+    let filtered = brand === 'Tất cả'
+      ? products
+      : products.filter(p => p.brand.toLowerCase() === brand.toLowerCase());
 
-    // Nếu không có sản phẩm
     if (!filtered || filtered.length === 0) {
       listProductHTML.innerHTML = `<p>Sản phẩm hiệu ${brand} đã hết hàng</p>`;
     } else {
@@ -66,33 +60,6 @@ function initializeShopPage() {
     updateTotalProducts(listProductHTML, total);
   }
 
-  // ======= TẠO THẺ SẢN PHẨM =======
-  function createProductCard(product) {
-    const newProduct = document.createElement('div');
-    newProduct.classList.add('product_card');
-    newProduct.innerHTML = `
-      <div class="image_card">
-        <img src="${product.img}" alt="">
-      </div>
-      <div class="product_infor">
-        <p>${product.brand}</p>
-        <h3>${product.name}</h3>
-        <div class="icon_card">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-regular fa-star"></i>
-        </div>
-        <div class="price_card">
-          <span class="official_price">${product.price}</span>
-          <span class="reduced_price">2.000.000</span>
-        </div>
-        <button><i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ hàng</button>
-      </div>`;
-    return newProduct;
-  }
-
   // ======= CẬP NHẬT SỐ SẢN PHẨM HIỂN THỊ =======
   function updateTotalProducts(listElement, totalElement) {
     if (!totalElement) return;
@@ -103,23 +70,17 @@ function initializeShopPage() {
   // ======= NÚT MẶC ĐỊNH KHI VỪA LOAD =======
   function initializeDefaultButton() {
     const defaultBtn = document.querySelector('.filed_type .type .default');
-    if (defaultBtn) {
-      defaultBtn.classList.add('active');
-    }
+    if (defaultBtn) defaultBtn.classList.add('active');
   }
 
+  // Nếu bạn không dùng product_detail.html có thể bỏ đoạn này
   let detailProduct = document.getElementById('product_card');
-
-  detailProduct.addEventListener('click', () => {
-    window.location.href = "/HTML/partials/product_detail.html";
-  })
-
-} // cuối initializeShopPage()
-
-
-  function goToDetail() {
-    window.location.href = "/HTML/partials/product_detail.html";
+  if (detailProduct) {
+    detailProduct.addEventListener('click', () => {
+      window.location.href = "/HTML/partials/product_detail.html";
+    });
   }
+}
 
 // ===============================
 // 🔹 TỰ ĐỘNG KHỞI TẠO NẾU MỞ SHOP.HTML RIÊNG
@@ -130,3 +91,66 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeShopPage();
   }
 });
+
+// ===============================
+// 🧱 TẠO THẺ SẢN PHẨM CÓ NÚT THÊM GIỎ HÀNG
+// ===============================
+function createProductCard(product) {
+  const newProduct = document.createElement('div');
+  newProduct.classList.add('product_card');
+  newProduct.innerHTML = `
+    <div class="image_card">
+      <img src="${product.img}" alt="${product.name}">
+    </div>
+    <div class="product_infor">
+      <p>${product.brand}</p>
+      <h3>${product.name}</h3>
+      <div class="icon_card">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+      </div>
+      <div class="price_card">
+        <span class="official_price">${product.price}</span>
+      </div>
+      <button class="add-cart-btn"><i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ hàng</button>
+    </div>`;
+
+  // Thêm sự kiện thêm giỏ hàng
+  newProduct.querySelector('.add-cart-btn').addEventListener('click', () => {
+    addToCart(product);
+  });
+
+  return newProduct;
+}
+
+// ===============================
+// 🛒 HÀM THÊM SẢN PHẨM VÀO GIỎ HÀNG
+// ===============================
+function addToCart(product) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const existingItem = cart.find(item => item.id === product.id);
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({
+      id: product.id,
+      name: product.name,
+      img: product.img,
+      price: convertPriceToNumber(product.price),
+      quantity: 1
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert(`✅ Đã thêm "${product.name}" vào giỏ hàng!`);
+}
+
+// 🔹 Chuyển giá từ "6.197.500₫" sang số
+function convertPriceToNumber(priceStr) {
+  if (!priceStr) return 0;
+  return Number(priceStr.replace(/[^\d]/g, ""));
+}

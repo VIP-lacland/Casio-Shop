@@ -87,6 +87,9 @@ body {
   cursor: pointer;
   margin-bottom: 20px;
 }
+.tong-ket-don-hang .distance {
+  margin-left: 20px;
+}
 .nut-tiep-tuc {
   background: #000;
   color: #fff;

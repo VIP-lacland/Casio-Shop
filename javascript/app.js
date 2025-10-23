@@ -35,3 +35,4 @@ window.addEventListener('DOMContentLoaded', () => {
   loadHTML('header', '/HTML/header.html');
   loadHTML('footer', '/HTML/footer.html');
 });
+
