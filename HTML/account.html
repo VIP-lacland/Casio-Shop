@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casio Store | Đăng nhập</title>
+
+  <!-- Font & Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="/styles/login.css">
+</head>
+ 
+<body>
+  <!-- Header sẽ được load bằng JavaScript -->
+    <div id="header"></div>
+<main>
+  <div class="container">
+    <div class="title">
+      <h1>CASIO STORE</h1>
+      <p>Đồng hồ chính hãng cho sinh viên</p>
+    </div>
+
+    <form id="authForm">
+      <div id="nameField" class="hidden">
+        <label for="name">Họ và tên</label>
+        <div class="input-group">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" id="name" name="name" placeholder="Nguyễn Văn A">
+        </div>
+      </div>
+
+      <div id="phoneField" class="hidden">
+        <label for="phone">Số điện thoại</label>
+        <div class="input-group">
+          <i class="fa-solid fa-phone"></i>
+          <input type="tel" id="phone" name="phone" placeholder="0912345678">
+        </div>
+      </div>
+
+      <label for="email">Email</label>
+      <div class="input-group">
+        <i class="fa-solid fa-envelope"></i>
+        <input type="email" id="email" name="email" placeholder="email@example.com" required>
+      </div>
+
+      <label for="password">Mật khẩu</label>
+      <div class="input-group">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" id="password" name="password" placeholder="••••••••" required>
+      </div>
+
+      <div id="confirmField" class="hidden">
+        <label for="confirmPassword">Xác nhận mật khẩu</label>
+        <div class="input-group">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••">
+        </div>
+      </div>
+
+      <button type="submit" class="submit">Đăng Nhập</button>
+    </form>
+
+    <div class="toggle">
+      <button id="toggleBtn">Chưa có tài khoản? Đăng ký ngay</button>
+    </div>
+
+    <div class="back-home">
+      <a href="/HTML/home.html">← Quay lại trang chủ</a>
+    </div>
+  </div>
+</main>
+  <!-- Footer sẽ được load bằng JavaScript -->
+    <div id="footer"></div>
+
+ <script src="/javascript/login.js"></script>
+ <script src="/javascript/app.js"> </script>
+
+</body>
+</html>
