@@ -1,4 +1,5 @@
 const detailContainer = document.querySelector('.product_detail')
+const btnAddCard = document.getElementById('addCard');
 
 const getDataProduct = async () => {
     const path = new URLSearchParams(window.location.search);
@@ -91,7 +92,7 @@ const getDataProduct = async () => {
                         <button class="qty-btn plus">+</button>
                     </div>
                     <div class="btn_buy">
-                        <button><i class="fa-solid fa-cart-shopping"></i>Thêm vào giỏ hàng</button>
+                        <button id="addCart"><i class="fa-solid fa-cart-shopping"></i>Thêm vào giỏ hàng</button>
                     </div>
                 </div>
             </div>
