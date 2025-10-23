@@ -20,11 +20,11 @@
       </button>
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto">
-          <li class="nav-item"><a class="nav-link" href="/HTML/partials/admin/products.html">Product</a></li>
-          <li class="nav-item"><a class="nav-link" href="/HTML/partials/admin/user.html">User</a></li>
+          <li class="nav-item"><a class="nav-link" href="/HTML/products.html">Product</a></li>
+          <li class="nav-item"><a class="nav-link" href="/HTML/user.html">User</a></li>
         </ul>
         <form class="d-flex">
-          <button class="btn btn-primary" type="button">Đăng xuất</button>
+          <button id="logout-btn" class="btn btn-primary" type="button">Đăng xuất</button>
         </form>
         <div class="ms-2">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" id="add-btn">
@@ -102,6 +102,19 @@
       </div>
     </div>
   </div>
+<script>
+  document.getElementById("logout-btn").addEventListener("click", function () {
+    // Xóa dữ liệu người dùng lưu trong localStorage / sessionStorage
+    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
+
+    // Thông báo
+    alert("Bạn đã đăng xuất thành công!");
+
+    // Chuyển hướng về trang đăng nhập
+    window.location.href = "/HTML/account.html";
+  });
+</script>
 
   <script src="/javascript/admin/add_product.js"></script>
 </body>
