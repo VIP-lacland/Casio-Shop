@@ -73,7 +73,7 @@ function initializeShopPage() {
   newProduct.classList.add('product_card');
 
   newProduct.innerHTML = `
-    <a href="/HTML/partials/product_detail.html?id=${product.id}">
+    <a href="/HTML/product_detail.html?id=${product.id}">
       <div class="image_card">
         <img src="${product.img}" alt="">
       </div>
@@ -124,14 +124,14 @@ function initializeShopPage() {
   let detailProduct = document.getElementById('product_card');
 
   detailProduct.addEventListener('click', () => {
-    window.location.href = "/HTML/partials/product_detail.html";
+    window.location.href = "/HTML/product_detail.html";
   })
 
 } // cuối initializeShopPage()
 
 
   function goToDetail() {
-    window.location.href = "/HTML/partials/product_detail.html";
+    window.location.href = "/HTML/product_detail.html";
   }
 
 // ===============================

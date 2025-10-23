@@ -1,5 +1,4 @@
 const detailContainer = document.querySelector('.product_detail')
-const btnAddCard = document.getElementById('addCard');
 
 const getDataProduct = async () => {
     const path = new URLSearchParams(window.location.search);
@@ -7,15 +6,15 @@ const getDataProduct = async () => {
 
     const productId = path.get('id');
     
-    const response = await fetch('http://localhost:3001/Product');
+    const response = await fetch('http://localhost:3000/Product');
     
     const data = await response.json();
-    console.log(data);
+
     const findProductId = data.find(item => item.id.toString() === productId.toString())
 
     detailContainer.innerHTML = `
         <div class="product_detail">
-        <a href="/HTML/product_detail.html" class="back_button">
+        <a href="/HTML/shop.html" class="back_button">
             <i class="fa-solid fa-arrow-left"></i> Quay lại cửa hàng
         </a>
         <div class="product">
@@ -92,7 +91,7 @@ const getDataProduct = async () => {
                         <button class="qty-btn plus">+</button>
                     </div>
                     <div class="btn_buy">
-                        <button id="addCart"><i class="fa-solid fa-cart-shopping"></i>Thêm vào giỏ hàng</button>
+                        <button><i class="fa-solid fa-cart-shopping"></i>Thêm vào giỏ hàng</button>
                     </div>
                 </div>
             </div>
@@ -103,4 +102,3 @@ const getDataProduct = async () => {
 }
 
 getDataProduct();
-
