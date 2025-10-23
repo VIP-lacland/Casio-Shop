@@ -1,11 +1,22 @@
-.btn {
-    margin-left: 5px;
+/* Cố định thanh navbar ở trên cùng */
+.navbar {
+  position: fixed !important; /* ép Bootstrap không override */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1050; /* cao hơn modal backdrop */
 }
 
-/* .modal {
-    position: relative;
-    top: -100px;
-} */
+/* Đẩy toàn bộ nội dung xuống dưới nav */
+body {
+  padding-top: 70px; /* chiều cao nav (tùy nav cao thấp chỉnh lại) */
+}
+
+/* Sửa lại .btn (tránh padding-top lỗi) */
+.btn {
+  margin-left: 5px;
+  padding-top: 0; /* bỏ padding-top thừa */
+}
 
 .modal-body div {
     margin-bottom: 10px;
