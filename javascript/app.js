@@ -51,6 +51,19 @@ async function loadPage(pageName) {
         if (pageName === 'contact') {
             initContactForm();
         }
+<<<<<<< HEAD
+=======
+        // 👉 Gắn sự kiện cho nút tài khoản sau khi shop đã load xong
+        if (pageName === 'shop') {
+    console.log("🛒 Shop page loaded. Running initializeShopPage...");
+    if (typeof initializeShopPage === 'function') {
+        initializeShopPage();
+    } else {
+        console.warn("⚠️ initializeShopPage() chưa sẵn sàng, kiểm tra shop.js import trong index.html");
+    }
+}
+        
+>>>>>>> origin/shop_page
     } catch (error) {
         console.error('Error loading page:', error);
         document.getElementById('main-content').innerHTML = `
@@ -63,9 +76,22 @@ async function loadPage(pageName) {
         `;
     }
 }
+ // load button acction 
+ function loadbuttonaccount(){
+    const accountButton = document.getElementById('account-button');
+    if (accountButton) {
+        accountButton.addEventListener('click', function() {
+            loadPage('account');
+        });
+    }   }
 
+<<<<<<< HEAD
 
 // Load header và footer
+=======
+// Load header và footer
+// Khởi chạy khi trang load
+>>>>>>> origin/shop_page
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded - starting app...'); // Debug
     
@@ -79,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('main-content').innerHTML = createDefaultHome();
 });
 
+<<<<<<< HEAD
 
 // lưu dữ liệu form vào local
  document.getElementById("contactForm").addEventListener("submit", function(e) {
@@ -112,3 +139,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // Xóa nội dung form
     document.getElementById("contactForm").reset();
   });
+=======
+>>>>>>> origin/shop_page

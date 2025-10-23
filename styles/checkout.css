@@ -1,0 +1,22 @@
+/* Link quay lại */
+.thanh-dieu-huong .back {
+  text-decoration: none;
+  color: #000000;             
+  font-size: 14px;
+}
+/* kích thước ảnh trong giỏ hàng  */
+.san-pham img {
+  width: 100px;
+  height: 100px;
+}
+.san-pham .thong-tin-san-pham {
+  flex: 1;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.cot-trai, .cot-phai {
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #000;
+}

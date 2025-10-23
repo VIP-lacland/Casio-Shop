@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="/styles/checkout.css">
+</head>
+<body>
+   <div class="thanh-dieu-huong">
+    <a href="#" class="back">
+        <p>← Quay lại giỏ hàng</p> 
+    </a>
+    <h1>Thanh toán</h1>
+    </div>
+  <div class="trang-thanh-toan">
+    <div class="cot-trai">
+    <!-- Đăng nhập -->
+    <div class="dang-nhap-tai-khoan">
+      <p>Bạn đã có tài khoản?</p>
+      <button class="nut-dang-nhap">Đăng nhập để tiếp tục</button>
+    </div>
+
+    <!-- Thông tin khách hàng -->
+    <div class="thong-tin-khach-hang">
+      <h2>Thông tin khách hàng</h2>
+      <input type="text" class="o-ho-ten" placeholder="Họ và tên*">
+      <input type="text" class="o-so-dien-thoai" placeholder="Số điện thoại*">
+      <input type="email" class="o-email" placeholder="Email*">
+    </div>
+
+    <!-- Địa chỉ giao hàng -->
+    <div class="dia-chi-giao-hang">
+      <h2>Địa chỉ giao hàng</h2>
+      <input type="text" class="o-dia-chi" placeholder="Số nhà, tên đường*">
+      <input type="text" class="o-phuong-xa" placeholder="Phường/Xã*">
+      <input type="text" class="o-thanh-pho" placeholder="Tỉnh/Thành phố*">
+      <textarea class="ghi-chu-don-hang" placeholder="Ghi chú đơn hàng (tuỳ chọn)"></textarea>
+    </div>
+
+    
+    <!-- Phương thức thanh toán -->
+    <div class="phuong-thuc-thanh-toan">
+      <h2>Phương thức thanh toán</h2>
+      <div class="lua-chon-thanh-toan">
+        <label><input type="radio" name="thanhtoan" checked> Thanh toán khi nhận hàng (COD)</label>
+        <label><input type="radio" name="thanhtoan"> Ví MoMo</label>
+      </div>
+    </div>
+    </div>
+    <div class="cot-phai">
+        <div class="don-hang-cua-ban">
+        <h2>Đơn hàng của bạn</h2>
+
+        <div class="san-pham">
+            <div class="thong-tin-san-pham">
+                <img src="https://product.hstatic.net/1000370129/product/iphone-xs-max-den_dceeba6383c24e34844206f8ffa5845b_master.jpg" alt="Product">
+                <h3>Iphone Xs-max 64gb</h3>
+                <p class="gia">3.290.000 ₫</p>
+            </div>
+        </div>
+
+        <div class="phi-van-chuyen">
+          <p>Phí vận chuyển:</p>
+          <p>Miễn phí</p>
+        </div>
+
+        <div class="tong-cong">
+          <p><strong>Tổng cộng:</strong></p>
+          <p class="gia-tong"><strong>2.380.000 đ</strong></p>
+        </div>
+        <button class="nut-dat-hang">Đặt hàng</button>
+
+    </div>
+</div>
+</body>
+</html>
