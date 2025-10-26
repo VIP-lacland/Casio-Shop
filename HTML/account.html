@@ -64,6 +64,11 @@
       <button id="toggleBtn">Chưa có tài khoản? Đăng ký ngay</button>
     </div>
 
+    <!-- Logout button for logged-in users (hidden when not logged in) -->
+    <div class="account-logout" style="margin-top:12px; text-align:center;">
+      <button id="logoutBtn" class="submit hidden">Đăng xuất</button>
+    </div>
+
     <div class="back-home">
       <a href="/HTML/index.html">← Quay lại trang chủ</a>
     </div>
@@ -74,6 +79,32 @@
 
  <script src="/javascript/login.js"></script>
  <script src="/javascript/app.js"> </script>
+
+  <script>
+    // Show account logout button when logged in and wire to global logout()
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (!logoutBtn) return;
+
+        if (currentUser) {
+          logoutBtn.classList.remove('hidden');
+          logoutBtn.addEventListener('click', () => {
+            // call global logout function if available, otherwise clear and redirect
+            if (typeof logout === 'function') {
+              logout();
+            } else {
+              sessionStorage.removeItem('currentUser');
+              window.location.href = '/HTML/index.html';
+            }
+          });
+        } else {
+          logoutBtn.classList.add('hidden');
+        }
+      } catch (err) { console.error(err); }
+    });
+  </script>
 
 </body>
 </html>

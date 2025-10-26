@@ -51,11 +51,21 @@ form.addEventListener('submit', async (e) => {
       }
 
       // Lưu user vào session
+      // Save to both sessionStorage (current session) and localStorage (persistent)
       sessionStorage.setItem('currentUser', JSON.stringify(user));
+      try { localStorage.setItem('currentUser', JSON.stringify(user)); } catch(e) { /* ignore */ }
 
       alert(`✅ Xin chào ${user.name || user.username}!`);
 
-      // Điều hướng dựa vào ROLE
+      // Nếu có redirect param (ví dụ: ?redirect=/HTML/checkout.html) => chuyển về đó
+      const params = new URLSearchParams(window.location.search);
+      const redirect = params.get('redirect');
+      if (redirect) {
+        window.location.href = redirect;
+        return;
+      }
+
+      // Điều hướng mặc định dựa vào ROLE
       if (user.role === "admin") {
         window.location.href = "/HTML/products.html";
       } else {
@@ -118,7 +128,9 @@ form.addEventListener('submit', async (e) => {
 // Kiểm tra user đã đăng nhập chưa
 window.addEventListener('load', () => {
   const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-  if (currentUser) {
+  // Nếu đã đăng nhập, chỉ redirect nếu không phải trang account.html
+  const path = window.location.pathname.split('/').pop();
+  if (currentUser && path !== 'account.html') {
     if (currentUser.role === "admin") {
       window.location.href = "/HTML/products.html";
     } else {
