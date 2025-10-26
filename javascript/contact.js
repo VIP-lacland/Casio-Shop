@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/trangchu
 // // lưu dữ liệu form vào local
 //  document.getElementById("contactForm").addEventListener("submit", function(e) {
 //     e.preventDefault(); 

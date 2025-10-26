@@ -5,7 +5,7 @@
   gap: 10px 1px;
   padding: 50px 40px 30px;
   font-family: "Poppins", sans-serif;
-  background-color: #0a0a0a;
+  background-color: black;
   color: white;
 }
 
@@ -92,71 +92,91 @@
   gap:1%;
 }
 
-.content .products .product_card:hover {
-  border: 2px solid #00ff88;
-  transform: translateY(-4px);
+/* ==== CARD PRODUCT ==== */
+.product_card {
+  background-color: #111;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
 }
 
-.products .product_card .image_card{
-  max-width: 100%;
+.product_card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 25px rgba(0, 255, 128, 0.4);
 }
 
-.products .product_card .image_card img{
-  width: 233px;
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
+.product_card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  flex: 1;
 }
 
-.product_card .product_infor {
-  padding: 0 16px 14px 16px;
+.image_card img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-.product_card .product_infor p {
-  color: gray;
-  font-size: 13px;
+.product_infor {
+  padding: 14px;
 }
 
-.product_card .product_infor h3 {
-  font-weight: 100;
-  font-size: medium;
-  margin-bottom: 30px;
+.product_infor p {
+  color: #9b9b9b;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
 }
 
-.product_card .product_infor .icon_card {
-  color: #00ff88;
-  font-size: 10px;
-  margin-bottom: 20px;
-}
-
-.product_infor .icon_card .fa-regular {
-  color: gray;
-}
-
-.product_card .product_infor .price_card {
+.product_infor h3 {
+  color: #fff;
+  font-size: 1.1rem;
   margin-bottom: 10px;
+  line-height: 1.3;
 }
 
-.product_card .product_infor .price_card .official_price {
-  font-size: large;
-  margin-right: 10px;
-  color: #00ff88;
+.icon_card {
+  color: #00ff80;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
 }
 
-.product_card .product_infor .price_card .reduced_price {
-  font-size: small;
+.price_card {
+  margin-bottom: 12px;
 }
 
-.product_card .product_infor button {
+.official_price {
+  color: #00ff80;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+/* Nút Thêm vào giỏ */
+.product_card button {
   width: 100%;
   height: 40px;
-  font-weight: 500;
-  border-style: none;
-  border-radius: 10px;
   background-color: #00ff88;
-  margin-top: auto;
+  color: black;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.product_card .product_infor button .fa-cart-shopping {
-  margin-right: 10px;
+.product_card button:hover {
+  background-color: #00e676;
 }
 
+/* Giữ sidebar đứng yên khi cuộn */
+.sidebar {
+  position: sticky;
+  top: 20px; 
+  align-self: start; 
+  height: fit-content; 
+  z-index: 10;
+}

@@ -36,3 +36,6 @@ window.addEventListener('DOMContentLoaded', () => {
   loadHTML('footer', '/HTML/footer.html');
 });
 
+
+  
+
