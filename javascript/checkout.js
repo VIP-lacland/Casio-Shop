@@ -157,3 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("donHang", JSON.stringify(donHang));
   });
 });
+
+
+// khi đăng nhập thì dữ liệu tự tự động điền vào "họ tên, số điện thoại, email" từ account với các tài khoản đã tạo ở db.son
