@@ -50,8 +50,9 @@ form.addEventListener('submit', async (e) => {
         return;
       }
 
-      // Lưu user vào session
-      sessionStorage.setItem('currentUser', JSON.stringify(user));
+      // Lưu user vào local
+      localStorage.setItem('user', JSON.stringify(user));
+
 
       alert(`✅ Xin chào ${user.name || user.username}!`);
 

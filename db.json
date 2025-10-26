@@ -202,5 +202,14 @@
       "role": "user",
       "createdAt": "2025-10-24T02:34:15.282Z"
     }
-  ]
+  ],
+"CurentUser": [
+      {
+      "id": "3",
+      "name": "Nguyễn Mạnh",
+      "phone": "0965734872",
+      "email": "manhhaha@gmail.com",
+      "password": "manhminhman123"
+    }
+]
 }

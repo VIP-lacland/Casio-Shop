@@ -159,4 +159,24 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
+
 // khi đăng nhập thì dữ liệu tự tự động điền vào "họ tên, số điện thoại, email" từ account với các tài khoản đã tạo ở db.son
+document.addEventListener("DOMContentLoaded", () => {
+  // Lấy user từ localStorage
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log("🔍 Dữ liệu user lấy từ localStorage:", user);
+
+  if (user) {
+    // Điền thông tin khách hàng
+    const nameInput = document.querySelector(".thong-tin-khach-hang input[type='text']");
+    const phoneInput = document.querySelector(".thong-tin-khach-hang input[type='number']");
+    const emailInput = document.querySelector(".thong-tin-khach-hang input[type='email']");
+    const loginSection = document.querySelector(".dang-nhap-tai-khoan");
+
+    if (nameInput) nameInput.value = user.name || user.fullname || "";
+    if (phoneInput) phoneInput.value = user.phone || user.sdt || "";
+    if (emailInput) emailInput.value = user.email || "";
+    if (loginSection) loginSection.style.display = "none";
+  }
+});
