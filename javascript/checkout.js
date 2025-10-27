@@ -1,6 +1,9 @@
+
 document.addEventListener("DOMContentLoaded", async () => {
   const orderContainer = document.querySelector(".don-hang-cua-ban");
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  if (!orderContainer) return; // nothing to do if checkout container missing
 
   // Nếu giỏ hàng rỗng
   if (cart.length === 0) {
@@ -11,22 +14,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // Tính tổng tiền
+  // Tính tổng tiền & render sản phẩm
   let tongTien = 0;
-  let htmlSanPham = "";
-
-  cart.forEach((item) => {
-    tongTien += item.price * item.quantity;
-    htmlSanPham += `
+  const htmlSanPham = cart
+    .map(item => {
+      tongTien += Number(item.price || 0) * Number(item.quantity || 1);
+      return `
       <div class="san-pham">
         <div class="thong-tin-san-pham">
-          <img src="${item.img}" alt="${item.name}">
-          <h3>${item.name}</h3>
-          <p class="gia">${Number(item.price).toLocaleString("vi-VN")} ₫ × ${item.quantity}</p>
+          <img src="${item.img || ''}" alt="${item.name || ''}">
+          <h3>${item.name || ''}</h3>
+          <p class="gia">${Number(item.price || 0).toLocaleString("vi-VN")} ₫ × ${item.quantity || 1}</p>
         </div>
-      </div>
-    `;
-  });
+      </div>`;
+    })
+    .join("");
 
   // Cập nhật giao diện Checkout
   orderContainer.innerHTML = `
@@ -43,45 +45,95 @@ document.addEventListener("DOMContentLoaded", async () => {
     <button class="nut-dat-hang">Đặt hàng</button>
   `;
 
-  // ==========================
-  // ✅ Nếu user đã đăng nhập -> tự điền dữ liệu từ localStorage
-  // ==========================
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (user) {
-    console.log("Tự điền thông tin người dùng:", user);
-
-    document.querySelector(".thong-tin-khach-hang input[type='text']").value = user.name || "";
-    document.querySelector(".thong-tin-khach-hang input[type='number']").value = user.phone || "";
-    document.querySelector(".thong-tin-khach-hang input[type='email']").value = user.email || "";
+  // Helper để lấy user từ sessionStorage hoặc localStorage (nhiều chỗ repo dùng key khác nhau)
+  function getCurrentUser() {
+    try {
+      const maybe = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser') || localStorage.getItem('user');
+      return maybe ? JSON.parse(maybe) : null;
+    } catch (e) {
+      return null;
+    }
   }
 
-  // ==========================
-  // ✅ Xử lý nút "Đặt hàng"
-  // ==========================
-  const datHangBtn = orderContainer.querySelector(".nut-dat-hang");
-  datHangBtn.addEventListener("click", () => {
-    const name = document.querySelector(".thong-tin-khach-hang input[type='text']").value;
-    const phone = document.querySelector(".thong-tin-khach-hang input[type='number']").value;
-    const email = document.querySelector(".thong-tin-khach-hang input[type='email']").value;
-    const address = document.querySelector(".cot-dia-chi input").value;
+  // Nếu user đã đăng nhập -> tự điền dữ liệu
+  const currentUser = getCurrentUser();
+  if (currentUser) {
+    const nameInput = document.querySelector(".thong-tin-khach-hang input[type='text']");
+    const phoneInput = document.querySelector(".thong-tin-khach-hang input[type='number']");
+    const emailInput = document.querySelector(".thong-tin-khach-hang input[type='email']");
+    if (nameInput) nameInput.value = currentUser.name || currentUser.username || currentUser.fullname || '';
+    if (phoneInput) phoneInput.value = currentUser.phone || currentUser.sdt || '';
+    if (emailInput) emailInput.value = currentUser.email || '';
+  }
 
-    if (!name || !phone || !email || !address) {
-      alert("⚠️ Vui lòng điền đầy đủ thông tin!");
+  // Xử lý nút "Đặt hàng" (chung cho cả trường hợp đã đăng nhập và chưa)
+  const datHangBtn = orderContainer.querySelector(".nut-dat-hang");
+  if (!datHangBtn) return;
+
+  datHangBtn.addEventListener("click", () => {
+    // Lấy dữ liệu khách hàng an toàn (kiểm tra tồn tại input trước)
+    const nameInput = document.querySelector('.thong-tin-khach-hang input[type="text"]');
+    const phoneInput = document.querySelector('.thong-tin-khach-hang input[type="number"]');
+    const emailInput = document.querySelector('.thong-tin-khach-hang input[type="email"]');
+    const addressInput = document.querySelector('.dia-chi-giao-hang .cot-dia-chi input[type="text"]') || document.querySelector('.cot-dia-chi input');
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const phone = phoneInput ? phoneInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const address = addressInput ? addressInput.value.trim() : '';
+
+    // Lấy các trường địa chỉ an toàn
+    const hangInputs = Array.from(document.querySelectorAll('.hang-dia-chi .cot input[type="text"]'));
+    const quanHuyen = hangInputs[0] ? hangInputs[0].value.trim() : '';
+    const tinhThanh = hangInputs[1] ? hangInputs[1].value.trim() : '';
+    const ghiChuEl = document.querySelector('.dia-chi-giao-hang textarea');
+    const ghiChu = ghiChuEl ? ghiChuEl.value.trim() : '';
+
+    // Phương thức thanh toán (lấy value nếu có, fallback sang textContent)
+    const thanhToanInput = document.querySelector('input[name="thanhtoan"]:checked');
+    let thanhToan = '';
+    if (thanhToanInput) {
+      thanhToan = thanhToanInput.value || (thanhToanInput.nextSibling && thanhToanInput.nextSibling.textContent.trim()) || '';
+    }
+
+    // Kiểm tra dữ liệu bắt buộc
+    if (!name || !phone || !email || !address || !quanHuyen || !tinhThanh) {
+      alert("⚠️ Vui lòng điền đầy đủ thông tin bắt buộc!");
       return;
     }
 
+    // Tạo thông tin sản phẩm từ cart
+    const sanPham = cart.map(it => ({
+      id: it.id,
+      ten: it.name,
+      gia: it.price,
+      soLuong: it.quantity,
+      anh: it.img,
+    }));
+
     const orderData = {
-      name,
-      phone,
-      email,
-      address,
-      cart,
-      total: tongTien,
-      date: new Date().toLocaleString("vi-VN"),
+      thongTinKhachHang: {
+        hoTen: name,
+        soDienThoai: phone,
+        email,
+        diaChi: address,
+        quanHuyen,
+        tinhThanh,
+        ghiChu,
+      },
+      phuongThucThanhToan: thanhToan,
+      sanPham,
+      tongTien: tongTien,
+      ngayDat: new Date().toLocaleString("vi-VN"),
     };
 
-    // Lưu tạm đơn hàng vào localStorage
-    localStorage.setItem("order", JSON.stringify(orderData));
+    // Lưu vào localStorage (cả keys cũ và mới để tương thích)
+    try {
+      localStorage.setItem("order", JSON.stringify(orderData));
+      localStorage.setItem("donHang", JSON.stringify(orderData));
+    } catch (e) {
+      console.error('Lỗi lưu order vào localStorage', e);
+    }
 
     alert("🎉 Đặt hàng thành công!");
     localStorage.removeItem("cart");
@@ -102,9 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
-
-
 // ========================== Lưu dữ liệu khi ko đăng nhập mà muốn đtặ hàng
 document.addEventListener("DOMContentLoaded", () => {
   const btnDatHang = document.querySelector(".nut-dat-hang");

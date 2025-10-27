@@ -201,15 +201,24 @@
       "password": "123456789",
       "role": "user",
       "createdAt": "2025-10-24T02:34:15.282Z"
+    },
+    {
+      "id": "7d34",
+      "username": "Huy võ",
+      "phone": "0365945156",
+      "email": "huy@gmail.com",
+      "password": "123456789",
+      "role": "user",
+      "createdAt": "2025-10-27T05:58:53.689Z"
     }
   ],
-"CurentUser": [
-      {
+  "CurentUser": [
+    {
       "id": "3",
       "name": "Nguyễn Mạnh",
       "phone": "0965734872",
       "email": "manhhaha@gmail.com",
       "password": "manhminhman123"
     }
-]
+  ]
 }
